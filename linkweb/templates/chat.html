@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sync-Chat | Chat with {{ friend.name }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="{{ url_for('static', filename='theme.js') }}"></script>
+    <link rel="icon" href="{{ url_for('static', filename='favicon.png') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <div class="navbar">
+        <div class="logo">Sync-Chat</div>
+        <div class="nav-links">
+            <a href="/friends"><i class="fa-solid fa-user-group"></i> Friends</a>
+            <a href="/logout"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+            <button class="toggle-btn" onclick="toggleTheme()">🌙 / ☀️</button>
+        </div>
+    </div>
+
+    <!-- Chat Container -->
+    <div class="chat-container">
+        <h2>Chat with <span style="color:#25D366;">{{ friend.name }}</span></h2>
+
+        <div class="chat-box">
+            <div class="messages" id="messages">
+                <p>Start chatting...</p>
+            </div>
+            <form onsubmit="sendMessage(); return false;">
+                <div class="input-area">
+                    <input type="text" id="messageInput" placeholder="Type your message..." required>
+
+                    <select id="platformSelect" required>
+                        {% if links.whatsapp %}
+                        <option value="whatsapp">WhatsApp</option>
+                        {% endif %}
+                        {% if links.instagram %}
+                        <option value="instagram">Instagram</option>
+                        {% endif %}
+                        {% if links.telegram %}
+                        <option value="telegram">Telegram</option>
+                        {% endif %}
+                        {% if links.facebook %}
+                        <option value="facebook">Facebook</option>
+                        {% endif %}
+                    </select>
+
+                    <button type="submit">
+                        <i class="fa-solid fa-paper-plane"></i> Send
+                    </button>
+                </div>
+            </form>
+
+        </div>
+
+        <br>
+        <a href="/friends" class="back-link"><i class="fa-solid fa-arrow-left"></i> Back to Friends</a>
+    </div>
+
+    <script>
+        function sendMessage() {
+            const message = document.getElementById('messageInput').value.trim();
+            const platform = document.getElementById('platformSelect').value;
+            let link = "#";
+
+            const links = {
+                whatsapp: "{{ links['whatsapp'] }}",
+                instagram: "{{ links['instagram'] }}",
+                telegram: "{{ links['telegram'] }}",
+                facebook: "{{ links['facebook'] }}"
+            };
+
+            if (platform === 'whatsapp' && links.whatsapp) {
+                link = links.whatsapp + "?text=" + encodeURIComponent(message);
+            } else if (platform === 'telegram' && links.telegram) {
+                link = links.telegram + "?text=" + encodeURIComponent(message);
+            } else if (platform === 'instagram' && links.instagram) {
+                link = links.instagram;
+                alert("Instagram doesn't support pre-filled messages.");
+            } else if (platform === 'facebook' && links.facebook) {
+                link = links.facebook;
+                alert("Facebook doesn't support pre-filled messages.");
+            }
+
+            const messagesDiv = document.getElementById('messages');
+            const newMsg = document.createElement('p');
+            newMsg.innerText = `Me: ${message} (via ${platform.charAt(0).toUpperCase() + platform.slice(1)})`;
+            messagesDiv.appendChild(newMsg);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+
+            window.open(link, '_blank');
+
+            document.getElementById('messageInput').value = '';
+        }
+    </script>
+
+</body>
+</html>

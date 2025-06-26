@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Friend | Sync-Chat</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="{{ url_for('static', filename='theme.js') }}"></script>
+    <link rel="icon" href="{{ url_for('static', filename='favicon.png') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <div class="navbar">
+        <div class="logo">Sync-Chat</div>
+        <div class="nav-links">
+            <a href="/friends"><i class="fa-solid fa-user-group"></i> Friends</a>
+            <a href="/logout"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+            <button class="toggle-btn" onclick="toggleTheme()">🌙 / ☀️</button>
+        </div>
+    </div>
+
+    <!-- Edit Friend Form -->
+    <div class="container">
+        <h2><i class="fa-solid fa-user-pen"></i> Edit Friend 
+            <span style="color:#25D366;">{{ friend.name }}</span>
+        </h2>
+
+        <form action="/edit_friend/{{ friend.id }}" method="POST">
+            
+            <label for="name"><i class="fa-solid fa-user"></i> Name</label>
+            <input type="text" id="name" name="name" value="{{ friend.name }}" required>
+
+            <label for="whatsapp"><i class="fa-brands fa-whatsapp"></i> WhatsApp Number</label>
+            <input type="text" id="whatsapp" name="whatsapp" value="{{ friend.whatsapp }}" placeholder="WhatsApp Number">
+
+            <label for="insta"><i class="fa-brands fa-instagram"></i> Instagram Username</label>
+            <input type="text" id="insta" name="insta" value="{{ friend.insta }}" placeholder="Instagram Username">
+
+            <label for="telegram"><i class="fa-brands fa-telegram"></i> Telegram Username</label>
+            <input type="text" id="telegram" name="telegram" value="{{ friend.telegram }}" placeholder="Telegram Username">
+
+            <label for="facebook"><i class="fa-brands fa-facebook"></i> Facebook Username</label>
+            <input type="text" id="facebook" name="facebook" value="{{ friend.facebook }}" placeholder="Facebook Username">
+
+            <button type="submit" class="action-btn">
+                <i class="fa-solid fa-floppy-disk"></i> Update Friend
+            </button>
+        </form>
+
+        <br>
+        <a href="/friends" class="back-link">
+            <i class="fa-solid fa-arrow-left"></i> Back to Friends
+        </a>
+    </div>
+
+</body>
+</html>
+

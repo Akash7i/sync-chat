@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard | Sync-Chat</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="{{ url_for('static', filename='theme.js') }}"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <div class="navbar">
+        <div class="logo">Sync-Chat</div>
+        <div class="nav-links">
+            <a href="/friends"><i class="fa-solid fa-user-group"></i> Friends</a>
+            <a href="/logout"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+            <button class="toggle-btn" onclick="toggleTheme()">🌙 / ☀️</button>
+        </div>
+    </div>
+
+    <!-- Main Centered Box -->
+    <div class="container" style="text-align: center;">
+        <h1>Welcome to <span style="color:var(--button-color);">Sync-Chat</span> 🚀</h1>
+        <p style="margin-bottom: 25px;">Manage all your friends and chat across platforms like WhatsApp, Instagram, Telegram, and Facebook — all in one place.</p>
+
+        <a href="/friends" class="action-btn">
+            <i class="fa-solid fa-comments"></i> Go to Chat
+        </a>
+    </div>
+
+</body>
+</html>

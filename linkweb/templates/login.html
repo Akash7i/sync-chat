@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login | Sync-Chat</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="{{ url_for('static', filename='theme.js') }}"></script>
+    <link rel="icon" href="{{ url_for('static', filename='favicon.png') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <div class="navbar">
+        <div class="logo">Sync-Chat</div>
+        <div class="nav-links">
+            <button class="toggle-btn" onclick="toggleTheme()">🌙 / ☀️</button>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container" style="text-align: center;">
+        <h2>Welcome to <span style="color: var(--button-color);">Sync-Chat</span> 🚀</h2>
+
+        <!-- Login Box -->
+        <div class="form-box">
+            <h3><i class="fa-solid fa-right-to-bracket"></i> Login</h3>
+            <form action="/login" method="POST">
+                <input name="username" placeholder="Username" required>
+                <input name="password" type="password" placeholder="Password" required>
+                <button type="submit" class="action-btn">
+                    <i class="fa-solid fa-right-to-bracket"></i> Login
+                </button>
+            </form>
+        </div>
+
+        <!-- Divider -->
+        <div class="divider"><span>OR</span></div>
+
+        <!-- Register Box -->
+        <div class="form-box">
+            <h3><i class="fa-solid fa-user-plus"></i> Register</h3>
+            <form action="/register" method="POST">
+                <input name="username" placeholder="Username" required>
+                <input name="password" type="password" placeholder="Password" required>
+                <input name="whatsapp" placeholder="Your WhatsApp Number">
+                <input name="insta" placeholder="Your Instagram Username">
+                <input name="telegram" placeholder="Your Telegram Username">
+                <input name="facebook" placeholder="Your Facebook Username">
+                <button type="submit" class="action-btn">
+                    <i class="fa-solid fa-user-plus"></i> Register
+                </button>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>
